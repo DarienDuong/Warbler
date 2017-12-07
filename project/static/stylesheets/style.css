@@ -273,7 +273,7 @@ nav + .container {
   background-color: #e6ecf0;
 }
 
-#sidebar-username {
+.sidebar-username {
   margin-top: 30px;
   font-size: 21px;
   font-weight: bold;
