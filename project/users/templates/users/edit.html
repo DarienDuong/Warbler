@@ -30,6 +30,36 @@
       {% endif %}
       {{ form.image_url(placeholder="Optional: What image do you want to use?", value=user.image_url,
       class="form-control") }}
+
+      {% if form.bio.errors %}
+        {% for error in form.bio.errors %}
+          <span class="text-danger">
+            {{ error }}
+          </span>
+        {% endfor %}
+      {% endif %}
+      {{ form.bio(placeholder="What's your bio?", value=user.bio, class="form-control") }}
+
+
+      {% if form.header_image_url.errors %}
+        {% for error in form.header_image_url.errors %}
+          <span class="text-danger">
+            {{ error }}
+          </span>
+        {% endfor %}
+      {% endif %}
+      {{ form.header_image_url(placeholder="What's your header_image_url?", value=user.header_image_url, class="form-control") }}
+
+
+      {% if form.location.errors %}
+        {% for error in form.location.errors %}
+          <span class="text-danger">
+            {{ error }}
+          </span>
+        {% endfor %}
+      {% endif %}
+      {{ form.location(placeholder="What's your location?", value=user.location, class="form-control") }}
+
       <p>To confirm changes, enter your password:</p>
       {% if form.password.errors %}
         {% for error in form.password.errors %}

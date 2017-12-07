@@ -45,6 +45,9 @@ class User(db.Model, UserMixin):
         self.email = email
         self.username = username
         self.image_url = image_url
+        self.header_image_url = ""
+        self.bio = ""
+        self.location = ""
         self.password = bcrypt.generate_password_hash(password).decode('UTF-8')
 
     def __repr__(self):

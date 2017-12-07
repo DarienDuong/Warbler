@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, url_for, Blueprint, flash
 from project.users.models import User
-from project.users.forms import UserForm, LoginForm
+from project.users.forms import UserForm, LoginForm, EditForm
 from project import db
 from sqlalchemy.exc import IntegrityError
 from flask_login import login_user, logout_user, current_user, login_required
@@ -87,7 +87,7 @@ def logout():
 @ensure_correct_user
 def edit(id):
     return render_template('users/edit.html',
-                           form=UserForm(),
+                           form=EditForm(),
                            user=User.query.get(id))
 
 
