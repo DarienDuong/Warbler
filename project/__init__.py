@@ -2,7 +2,8 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
+
 import os
 
 app = Flask(__name__)
@@ -41,9 +42,11 @@ def load_user(id):
 
 @app.route('/')
 def root():
-    messages = Message.query.order_by("timestamp asc").limit(100).all()
-    return render_template('home.html', messages=messages)
-
+    if current_user.is_authenticated:
+        following = [following.id for following in current_user.following]
+        following.append(current_user.id)
+        return render_template('home.html', messages = Message.query.filter(Message.user_id.in_(following)).order_by("timestamp desc").limit(100).all())
+    return render_template('home.html')
 
 @app.after_request
 def add_header(r):
