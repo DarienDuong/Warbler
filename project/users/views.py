@@ -1,5 +1,6 @@
 from flask import redirect, render_template, request, url_for, Blueprint, flash
 from project.users.models import User
+# from project.messages.models import Like
 from project.users.forms import UserForm, LoginForm, EditForm
 from project import db
 from sqlalchemy.exc import IntegrityError
@@ -116,6 +117,16 @@ def following(id):
 def followers(id):
     return render_template('users/followers.html', user=User.query.get(id))
 
+
+@users_blueprint.route('/<int:id>/likes', methods=['GET'])
+@login_required
+def likes(id):
+   user = User.query.get(id)
+   # user = Like.query.filter_by(user_id=id).first()
+   # from IPython import embed; embed()
+   return render_template('users/likes.html', user=User.query.get(id))
+
+# user.likes[0].message.text
 
 @users_blueprint.route('/<int:id>', methods=["GET", "PATCH", "DELETE"])
 def show(id):

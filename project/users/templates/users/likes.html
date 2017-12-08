@@ -1,0 +1,21 @@
+{% extends 'user_page.html' %}
+{% block user_details %}
+<div class="col-sm-6">
+ <ul class="list-group" id="messages">
+   {% for like in user.likes %}
+   <li class="list-group-item">
+     <a href="{{ url_for('messages.show', id=user.id, message_id=like.message.id ) }}" class="message-link"/>
+     <a href="{{ url_for('users.show', id=like.message.user_id) }}">
+       <img src="{{ like.message.user.image_url }}" alt="" class="timeline-image">
+     </a>
+     <div class="message-area">
+       <a href="{{ url_for('users.show', id=like.message.user_id) }}">@{{ like.message.user.username }}</a>
+       <span class="text-muted">{{ like.message.timestamp.strftime('%d %B %Y') }}</span>
+       <span class="text-right"><i class="fa fa-heart" aria-hidden="true"></i></span>
+       <p>{{ like.message.text }}</p>
+     </div>
+   </li>
+   {% endfor %}
+ </ul>
+</div>
+{% endblock %}

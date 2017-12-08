@@ -40,7 +40,8 @@ class User(db.Model, UserMixin):
                                 backref=db.backref(
                                     'following', lazy='dynamic'),
                                 lazy='dynamic')
-
+    likes = db.relationship('Like', backref='user', lazy='dynamic')
+    
     def __init__(self, email, username, password, image_url='/static/images/default-pic.png'):
         self.email = email
         self.username = username

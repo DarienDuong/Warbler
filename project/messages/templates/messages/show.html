@@ -26,6 +26,20 @@
                 </form>
               {% endif %}
             {% endif %}
+
+
+
+            {% if current_user.is_authenticated %}
+              {% if liked %}
+                <form method="POST" action="{{url_for('messages.like', id=current_user.id, message_id = message.id)}}?_method=DELETE">
+                  <input type="submit" value="UnLike" class="btn btn-primary">
+                </form>
+              {% else %}
+                <form method="POST" action="{{url_for('messages.like', id=current_user.id, message_id = message.id)}}">
+                  <input type="submit" value="Like" class="btn btn-outline-primary btn-sm">
+                </form>
+              {% endif %}
+            {% endif %}
           </div>
           <p class="single-message">{{ message.text }}</p>
           <span class="text-muted">{{ message.timestamp.strftime('%d %B %Y') }}</span>
